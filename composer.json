@@ -1,0 +1,17 @@
+{
+    "name": "radiustheme/the-post-grid",
+    "autoload": {
+        "psr-4": {
+            "RT\\ThePostGrid\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "RadiusTheme",
+            "email": "admin@radiustheme.com"
+        }
+    ],
+    "require": {
+        "ext-json": "*"
+    }
+}
