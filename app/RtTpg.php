@@ -35,7 +35,8 @@ if ( ! class_exists( RtTpg::class ) ) {
 		 *
 		 * @var string
 		 */
-		public $post_type = 'tpg';
+		public $post_type = 'tpg_layout';
+		public $taxonomy1 = 'tpg_layout_category';
 
 		/**
 		 * Options
@@ -131,7 +132,7 @@ if ( ! class_exists( RtTpg::class ) ) {
 		public function load_language() {
 			do_action( 'tpg_api_set_local', null );
 			$locale = determine_locale();
-			$locale = apply_filters( 'plugin_locale', $locale, 'the-post-grid' );
+			$locale = apply_filters( 'plugin_locale', $locale, 'the-post-grid-api' );
 			unload_textdomain( 'the-post-grid-api' );
 			load_textdomain( 'the-post-grid-api', WP_LANG_DIR . '/the-post-grid-api/the-post-grid-api-' . $locale . '.mo' );
 			load_plugin_textdomain( 'the-post-grid-api', false, plugin_basename( dirname( RT_THE_POST_GRID_API_PLUGIN_FILE ) ) . '/languages' );

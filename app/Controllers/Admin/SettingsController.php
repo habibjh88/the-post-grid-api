@@ -106,9 +106,9 @@ class SettingsController {
 		$html .= '<div class="rt-document-box rt-alert rt-pro-alert">
 					<div class="rt-box-icon"><i class="dashicons dashicons-lock"></i></div>
 					<div class="rt-box-content">
-						<h3 class="rt-box-title">' . esc_html__( 'Pro field alert!', 'the-post-grid' ) . '</h3>
-						<p><span></span>' . esc_html__( 'Sorry! this is a Pro field. To use this field, you need to use Pro plugin.', 'the-post-grid' ) . '</p>
-						<a href="' . esc_url( rtTpg()->proLink() ) . '" target="_blank" class="rt-admin-btn">' . esc_html__( 'Upgrade to Pro', 'the-post-grid' ) . '</a>
+						<h3 class="rt-box-title">' . esc_html__( 'Pro field alert!', 'the-post-grid-api' ) . '</h3>
+						<p><span></span>' . esc_html__( 'Sorry! this is a Pro field. To use this field, you need to use Pro plugin.', 'the-post-grid-api' ) . '</p>
+						<a href="' . esc_url( rtTpg()->proLink() ) . '" target="_blank" class="rt-admin-btn">' . esc_html__( 'Upgrade to Pro', 'the-post-grid-api' ) . '</a>
 						<a href="#" target="_blank" class="rt-alert-close rt-pro-alert-close">x</a>
 					</div>
 				</div>';
@@ -189,8 +189,8 @@ class SettingsController {
 	public function register() {
 		add_submenu_page(
 			'edit.php?post_type=' . rtTPG()->post_type,
-			esc_html__( 'Settings', 'the-post-grid' ),
-			esc_html__( 'Settings', 'the-post-grid' ),
+			esc_html__( 'Settings', 'the-post-grid-api' ),
+			esc_html__( 'Settings', 'the-post-grid-api' ),
 			'administrator',
 			'tpg_api_settings',
 			[ $this, 'settings' ]
@@ -198,8 +198,8 @@ class SettingsController {
 
 		add_submenu_page(
 			'edit.php?post_type=' . rtTPG()->post_type,
-			esc_html__( 'Get Help', 'the-post-grid' ),
-			esc_html__( 'Get Help', 'the-post-grid' ),
+			esc_html__( 'Get Help', 'the-post-grid-api' ),
+			esc_html__( 'Get Help', 'the-post-grid-api' ),
 			'administrator',
 			'tpg_api_get_help',
 			[ $this, 'get_help' ]

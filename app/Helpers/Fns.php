@@ -96,7 +96,7 @@ class Fns {
 		$imgSize = [];
 
 		if ( ! empty( $sizes ) ) {
-			$imgSize['full'] = esc_html__( 'Full Size', 'the-post-grid' );
+			$imgSize['full'] = esc_html__( 'Full Size', 'the-post-grid-api' );
 			foreach ( $sizes as $key => $img ) {
 				$imgSize[ $key ] = ucfirst( $key ) . " ({$img['width']}*{$img['height']})";
 			}

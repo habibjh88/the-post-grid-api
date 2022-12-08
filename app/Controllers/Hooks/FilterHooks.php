@@ -82,8 +82,8 @@ class FilterHooks {
 			$row_meta['issues'] = sprintf(
 				'%2$s <a target="_blank" href="%1$s">%3$s</a>',
 				esc_url( $report_url ),
-				esc_html__( 'Facing issue?', 'the-post-grid' ),
-				'<span style="color: red">' . esc_html__( 'Please open a support ticket.', 'the-post-grid' ) . '</span>'
+				esc_html__( 'Facing issue?', 'the-post-grid-api' ),
+				'<span style="color: red">' . esc_html__( 'Please open a support ticket.', 'the-post-grid-api' ) . '</span>'
 			);
 
 			return array_merge( $links, $row_meta );

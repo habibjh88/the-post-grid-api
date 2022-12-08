@@ -1,8 +1,8 @@
 {
-    "name": "radiustheme/the-post-grid",
+    "name": "radiustheme/the-post-grid-api",
     "autoload": {
         "psr-4": {
-            "RT\\ThePostGrid\\": "app/"
+            "RT\\ThePostGridAPI\\": "app/"
         }
     },
     "authors": [

@@ -66,9 +66,9 @@ class NoticeController {
 								<?php
 								echo sprintf(
 									'%1$s<a style="color: #fff;" href="%2$s">%3$s</a>',
-									esc_html__( 'You have selected only Elementor method. To use Shortcode Generator please enable shortcode or default from ', 'the-post-grid' ),
+									esc_html__( 'You have selected only Elementor method. To use Shortcode Generator please enable shortcode or default from ', 'the-post-grid-api' ),
 									esc_url( admin_url( 'edit.php?post_type=tpg&page=tpg_api_settings' ) ),
-									esc_html__( 'Settings => Common Settings => Resource Load Type', 'the-post-grid' )
+									esc_html__( 'Settings => Common Settings => Resource Load Type', 'the-post-grid-api' )
 								);
 								?>
                             </p>
@@ -83,9 +83,9 @@ class NoticeController {
 								<?php
 								echo sprintf(
 									'%1$s<a style="color: #fff;" href="%2$s">%3$s</a>',
-									esc_html__( 'You have selected only Shortcode Generator method. To use Elementor please enable Elementor or default from ', 'the-post-grid' ),
+									esc_html__( 'You have selected only Shortcode Generator method. To use Elementor please enable Elementor or default from ', 'the-post-grid-api' ),
 									esc_url( admin_url( 'edit.php?post_type=tpg&page=tpg_api_settings&section=common-settings' ) ),
-									esc_html__( 'Settings => Common Settings => Resource Load Type', 'the-post-grid' )
+									esc_html__( 'Settings => Common Settings => Resource Load Type', 'the-post-grid-api' )
 								);
 								?>
                             </p>
@@ -266,8 +266,8 @@ class NoticeController {
 						</div>
 					</div>
 				</div>',
-				esc_html__( 'Enjoying The Post Grid?', 'the-post-grid' ),
-				esc_html__( 'Thank you for choosing The Post Grid. If you have found our plugin useful and makes you smile, please consider giving us a 5-star rating on WordPress.org. It will help us to grow.', 'the-post-grid' ),
+				esc_html__( 'Enjoying The Post Grid?', 'the-post-grid-api' ),
+				esc_html__( 'Thank you for choosing The Post Grid. If you have found our plugin useful and makes you smile, please consider giving us a 5-star rating on WordPress.org. It will help us to grow.', 'the-post-grid-api' ),
 				esc_url( $reviewurl ),
 				esc_url( $rated ),
 				esc_url( $remind_me ),

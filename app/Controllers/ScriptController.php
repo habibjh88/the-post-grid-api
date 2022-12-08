@@ -30,7 +30,7 @@ class ScriptController {
 		$this->version = defined( 'WP_DEBUG' ) && WP_DEBUG ? time() : RT_THE_POST_GRID_API_VERSION;
 		add_action( 'wp_head', [ $this, 'header_scripts' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
-		add_action( 'init', [ $this, 'init' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue' ] );
 	}
 
 
@@ -45,34 +45,56 @@ class ScriptController {
 		$styles  = [];
 
 		$scripts[] = [
-			'handle' => 'tpg-api-main',
-			'src'    => rtTPG()->get_assets_uri( 'js/frontend.js' ),
+			'handle' => 'tpgapi-main',
+			'src'    => rtTPG()->get_assets_uri( 'js/app.js' ),
+			'deps'   => [ 'jquery' ],
+			'footer' => true,
+		];
+
+		$scripts[] = [
+			'handle' => 'tpgapi-admin',
+			'src'    => rtTPG()->get_assets_uri( 'js/admin.js' ),
 			'deps'   => [ 'jquery' ],
 			'footer' => true,
 		];
 
 		// Plugin specific css.
-		$styles['rt-tpg']           = rtTPG()->tpg_can_be_rtl( 'css/tpg-api' );
+		$styles['tpgapi-main'] = rtTPG()->get_assets_uri( 'css/tpg-api' );
 
-		if ( is_admin() ) {
-			$scripts[] = [
-				'handle' => 'rt-tpg-admin',
-				'src'    => rtTPG()->get_assets_uri( 'js/admin.js' ),
-				'deps'   => [ 'jquery' ],
-				'footer' => true,
-			];
-
-			$styles['rt-tpg-admin']         = rtTPG()->get_assets_uri( 'css/admin/admin.css' );
-		}
 
 		foreach ( $scripts as $script ) {
-			wp_register_script( $script['handle'], $script['src'], $script['deps'], isset( $script['version'] ) ? $script['version'] : $this->version, $script['footer'] );
+			wp_enqueue_script( $script['handle'], $script['src'], $script['deps'], isset( $script['version'] ) ? $script['version'] : $this->version, $script['footer'] );
 		}
 
 		foreach ( $styles as $k => $v ) {
-			wp_register_style( $k, $v, false, isset( $script['version'] ) ? $script['version'] : $this->version );
+			wp_enqueue_style( $k, $v, false, isset( $script['version'] ) ? $script['version'] : $this->version );
 		}
 
+	}
+
+	public function admin_enqueue() {
+		// register scripts.
+		$scripts = [];
+		$styles  = [];
+
+
+		$scripts[] = [
+			'handle' => 'tpgapi-tpg-admin',
+			'src'    => rtTPG()->get_assets_uri( 'js/admin.js' ),
+			'deps'   => [ 'jquery' ],
+			'footer' => true,
+		];
+
+		$styles['tpgapi-tpg-admin'] = rtTPG()->get_assets_uri( 'css/admin.css' );
+
+
+		foreach ( $scripts as $script ) {
+			wp_enqueue_script( $script['handle'], $script['src'], $script['deps'], isset( $script['version'] ) ? $script['version'] : $this->version, $script['footer'] );
+		}
+
+		foreach ( $styles as $k => $v ) {
+			wp_enqueue_style( $k, $v, false, isset( $script['version'] ) ? $script['version'] : $this->version );
+		}
 	}
 
 	/**

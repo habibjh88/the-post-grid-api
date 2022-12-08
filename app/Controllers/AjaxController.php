@@ -37,7 +37,7 @@ class AjaxController {
 			//Do work here
 
 		} else {
-			$msg = esc_html__( 'Server Error !!', 'the-post-grid' );
+			$msg = esc_html__( 'Server Error !!', 'the-post-grid-api' );
 		}
 
 		$response = [];
