@@ -45,23 +45,24 @@ class PostTypeController {
 			'not_found_in_trash' => esc_html__( 'No Layouts found in Trash', 'the-post-grid-api' ),
 		];
 
-		$args = [
-			'labels'          => $labels,
-			'public'          => true,
-			'show_ui'         => true,
-			'_builtin'        => false,
-			'capability_type' => 'page',
-			'hierarchical'    => true,
-			'menu_icon'       => 'dashicons-align-full-width',
-			'rewrite'         => false,
-			'query_var'       => rtTPG()->post_type,
-			'show_in_rest' => true,
-			'supports'        => [ 'title', 'editor', 'author', 'thumbnail','trackbacks' ],
-			'show_in_menu'    => true,
-			'menu_position'   => 20,
-		];
 
-		register_post_type( rtTPG()->post_type, $args );
+		$args = array(
+			'labels'             => $labels,
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => 'layouts' ),
+			'capability_type'    => 'page',
+			'has_archive'        => true,
+			'hierarchical'       => true,
+			'show_in_rest' => true,
+			'menu_position'   => 22,
+			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+		);
+
+		register_post_type( rtTPGApi()->post_type, $args );
 
 	}
 
@@ -100,7 +101,7 @@ class PostTypeController {
 			'rewrite'               => [ 'slug' => 'writer' ],
 		];
 
-		register_taxonomy( rtTPG()->taxonomy1, rtTPG()->post_type, $args );
+		register_taxonomy( rtTPGApi()->taxonomy1, rtTPGApi()->post_type, $args );
 	}
 
 }

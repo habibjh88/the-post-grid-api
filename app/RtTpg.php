@@ -24,11 +24,11 @@ use RT\ThePostGridAPI\Controllers\AjaxController;
 use RT\ThePostGridAPI\Helpers\Install;
 
 
-if ( ! class_exists( RtTpg::class ) ) {
+if ( ! class_exists( RtTpgApi::class ) ) {
 	/**
 	 * Main initialization class.
 	 */
-	final class RtTpg {
+	final class RtTpgApi {
 
 		/**
 		 * Post Type
@@ -238,12 +238,12 @@ if ( ! class_exists( RtTpg::class ) ) {
 	/**
 	 * Function for external use.
 	 *
-	 * @return rtTPG
+	 * @return RtTpgApi
 	 */
-	function rtTPG() {
-		return rtTPG::getInstance();
+	function rtTPGApi() {
+		return RtTpgApi::getInstance();
 	}
 
 	// Init app.
-	rtTPG();
+	rtTPGApi();
 }

@@ -12,6 +12,6 @@ class RestApi {
 	 * Register rest route
 	 */
 	public function __construct() {
-		new GetPostsV1();
+		new GetLayoutsV1();
 	}
 }

@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Install {
 
 	public static function activate() {
-		update_option( rtTPG()->options['installed_version'], RT_THE_POST_GRID_API_VERSION );
+		update_option( rtTPGApi()->options['installed_version'], RT_THE_POST_GRID_API_VERSION );
 		add_option( 'tpg_api_activation_redirect', true );
 	}
 

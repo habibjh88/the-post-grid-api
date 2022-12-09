@@ -32,8 +32,8 @@ class Fns {
 	 * @return bool
 	 */
 	public static function verifyNonce() {
-		$nonce     = isset( $_REQUEST[ rtTPG()->nonceId() ] ) ? sanitize_text_field( wp_unslash( $_REQUEST[ rtTPG()->nonceId() ] ) ) : null;
-		$nonceText = rtTPG()->nonceText();
+		$nonce     = isset( $_REQUEST[ rtTPGApi()->nonceId() ] ) ? sanitize_text_field( wp_unslash( $_REQUEST[ rtTPGApi()->nonceId() ] ) ) : null;
+		$nonceText = rtTPGApi()->nonceText();
 
 		if ( ! wp_verify_nonce( $nonce, $nonceText ) ) {
 			return false;

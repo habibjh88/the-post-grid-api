@@ -46,20 +46,20 @@ class ScriptController {
 
 		$scripts[] = [
 			'handle' => 'tpgapi-main',
-			'src'    => rtTPG()->get_assets_uri( 'js/app.js' ),
+			'src'    => rtTPGApi()->get_assets_uri( 'js/app.js' ),
 			'deps'   => [ 'jquery' ],
 			'footer' => true,
 		];
 
 		$scripts[] = [
 			'handle' => 'tpgapi-admin',
-			'src'    => rtTPG()->get_assets_uri( 'js/admin.js' ),
+			'src'    => rtTPGApi()->get_assets_uri( 'js/admin.js' ),
 			'deps'   => [ 'jquery' ],
 			'footer' => true,
 		];
 
 		// Plugin specific css.
-		$styles['tpgapi-main'] = rtTPG()->get_assets_uri( 'css/tpg-api' );
+		$styles['tpgapi-main'] = rtTPGApi()->get_assets_uri( 'css/tpg-api' );
 
 
 		foreach ( $scripts as $script ) {
@@ -80,12 +80,12 @@ class ScriptController {
 
 		$scripts[] = [
 			'handle' => 'tpgapi-tpg-admin',
-			'src'    => rtTPG()->get_assets_uri( 'js/admin.js' ),
+			'src'    => rtTPGApi()->get_assets_uri( 'js/admin.js' ),
 			'deps'   => [ 'jquery' ],
 			'footer' => true,
 		];
 
-		$styles['tpgapi-tpg-admin'] = rtTPG()->get_assets_uri( 'css/admin.css' );
+		$styles['tpgapi-tpg-admin'] = rtTPGApi()->get_assets_uri( 'css/admin.css' );
 
 
 		foreach ( $scripts as $script ) {

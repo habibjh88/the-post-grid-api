@@ -54,7 +54,7 @@ class SettingsController {
 			add_filter( 'mce_buttons', [ $this, 'mce_buttons' ] );
 			echo '<style>';
 			echo 'i.mce-i-rt_tpg_scg{';
-			echo "background: url('" . esc_url( rtTPG()->get_assets_uri( 'images/icon-20x20.png' ) ) . "');";
+			echo "background: url('" . esc_url( rtTPGApi()->get_assets_uri( 'images/icon-20x20.png' ) ) . "');";
 			echo '}';
 			echo '</style>';
 		}
@@ -68,7 +68,7 @@ class SettingsController {
 	 * @return array
 	 */
 	public function mce_external_plugins( $plugin_array ) {
-		$plugin_array[ $this->sc_tag ] = rtTPG()->get_assets_uri( 'js/mce-button.js' );
+		$plugin_array[ $this->sc_tag ] = rtTPGApi()->get_assets_uri( 'js/mce-button.js' );
 
 		return $plugin_array;
 	}
@@ -94,11 +94,11 @@ class SettingsController {
 	public function pro_alert_html() {
 		global $typenow;
 
-		if ( rtTPG()->hasPro() ) {
+		if ( rtTPGApi()->hasPro() ) {
 			return;
 		}
 
-		if ( ( isset( $_GET['page'] ) && 'tpg_api_settings' !== $_GET['page'] ) || rtTPG()->post_type !== $typenow ) {
+		if ( ( isset( $_GET['page'] ) && 'tpg_api_settings' !== $_GET['page'] ) || rtTPGApi()->post_type !== $typenow ) {
 			return;
 		}
 
@@ -122,7 +122,7 @@ class SettingsController {
 	 * @return void
 	 */
 	public function tpg_dequeue_unnecessary_styles() {
-		$settings = get_option( rtTPG()->options['settings'] );
+		$settings = get_option( rtTPGApi()->options['settings'] );
 
 		if ( isset( $settings['tpg_skip_fa'] ) ) {
 			wp_dequeue_style( 'rt-fontawsome' );
@@ -141,7 +141,7 @@ class SettingsController {
 		if ( ! in_array( $pagenow, [ 'edit.php' ], true ) ) {
 			return;
 		}
-		if ( rtTPG()->post_type !== $typenow ) {
+		if ( rtTPGApi()->post_type !== $typenow ) {
 			return;
 		}
 
@@ -151,13 +151,13 @@ class SettingsController {
 		// styles.
 		wp_enqueue_style( 'rt-tpg-admin' );
 
-		$nonce = wp_create_nonce( rtTPG()->nonceText() );
+		$nonce = wp_create_nonce( rtTPGApi()->nonceText() );
 
 		wp_localize_script(
 			'rt-tpg-admin',
 			'tpg',
 			[
-				'nonceID' => esc_attr( rtTPG()->nonceId() ),
+				'nonceID' => esc_attr( rtTPGApi()->nonceId() ),
 				'nonce'   => esc_attr( $nonce ),
 				'ajaxurl' => esc_url( admin_url( 'admin-ajax.php' ) ),
 			]
@@ -174,7 +174,7 @@ class SettingsController {
 		$links[] = '<a target="_blank" href="' . esc_url( rtTpg()->demoLink() ) . '">Demo</a>';
 		$links[] = '<a target="_blank" href="' . esc_url( rtTpg()->docLink() ) . '">Documentation</a>';
 
-		if ( ! rtTPG()->hasPro() ) {
+		if ( ! rtTPGApi()->hasPro() ) {
 			$links[] = '<a target="_blank" style="color: #39b54a;font-weight: 700;" href="' . esc_url( rtTpg()->proLink() ) . '">Get Pro</a>';
 		}
 
@@ -188,7 +188,7 @@ class SettingsController {
 	 */
 	public function register() {
 		add_submenu_page(
-			'edit.php?post_type=' . rtTPG()->post_type,
+			'edit.php?post_type=' . rtTPGApi()->post_type,
 			esc_html__( 'Settings', 'the-post-grid-api' ),
 			esc_html__( 'Settings', 'the-post-grid-api' ),
 			'administrator',
@@ -197,7 +197,7 @@ class SettingsController {
 		);
 
 		add_submenu_page(
-			'edit.php?post_type=' . rtTPG()->post_type,
+			'edit.php?post_type=' . rtTPGApi()->post_type,
 			esc_html__( 'Get Help', 'the-post-grid-api' ),
 			esc_html__( 'Get Help', 'the-post-grid-api' ),
 			'administrator',

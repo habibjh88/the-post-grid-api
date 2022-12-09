@@ -27,6 +27,8 @@ class FilterHooks {
 		add_filter( 'plugin_row_meta', [ __CLASS__, 'plugin_row_meta' ], 10, 2 );
 		add_filter( 'admin_body_class', [ __CLASS__, 'admin_body_class' ] );
 		add_filter( 'wp_kses_allowed_html', [ __CLASS__, 'tpg_custom_wpkses_post_tags' ], 10, 2 );
+		add_filter( 'single_template', [ __CLASS__, 'template_callback' ] );
+//		add_filter( 'post_type_link', [ __CLASS__, 'layouts_post_link' ], 10, 2 );
 	}
 
 	public static function tpg_custom_wpkses_post_tags( $tags, $context ) {
@@ -90,6 +92,41 @@ class FilterHooks {
 		}
 
 		return (array) $links;
+	}
+
+	/**
+	 * @param $file
+	 *
+	 * @return mixed|string
+	 */
+	function template_callback( $file ) {
+		global $post;
+		if ( $post->post_type == rtTPGApi()->post_type ) {
+			$file_path = RT_THE_POST_GRID_API_PLUGIN_PATH . '/templates/single-layout.php'; //Actual file path
+			$file      = $file_path;
+		}
+
+		return $file;
+	}
+
+	function layouts_post_link( $link, $post ) {
+		if ( $post->post_type != rtTPGApi()->post_type ) {
+			return $link;
+		}
+//		if ( is_object( $post ) ) {
+//			$terms = wp_get_object_terms( $post->ID, rtTPGApi()->taxonomy1 );
+//			if ( $terms ) {
+//				return str_replace( '%layout%', $terms[0]->slug, $link );
+//			}
+//		}
+
+
+		if ( $cats = get_the_terms( $post->ID, rtTPGApi()->taxonomy1 ) ) {
+			$link = str_replace( '%layout%', array_pop( $cats )->slug, $link );
+		}
+
+
+		return $link;
 	}
 
 
