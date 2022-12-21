@@ -46,21 +46,21 @@ class PostTypeController {
 		];
 
 
-		$args = array(
+		$args = [
 			'labels'             => $labels,
 			'public'             => true,
 			'publicly_queryable' => true,
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'layouts' ),
+			'rewrite'            => [ 'slug' => 'layouts' ],
 			'capability_type'    => 'page',
 			'has_archive'        => true,
 			'hierarchical'       => true,
-			'show_in_rest' => true,
-			'menu_position'   => 22,
-			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
-		);
+			'show_in_rest'       => true,
+			'menu_position'      => 22,
+			'supports'           => [ 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ],
+		];
 
 		register_post_type( rtTPGApi()->post_type, $args );
 
@@ -71,37 +71,54 @@ class PostTypeController {
 	 * @return void
 	 */
 	function register_taxonomy() {
-		$labels = [
-			'name'                       => _x( 'Categories', 'taxonomy category name', 'the-post-grid-api' ),
-			'singular_name'              => _x( 'Category', 'taxonomy singular name', 'the-post-grid-api' ),
-			'search_items'               => __( 'Search Categories', 'the-post-grid-api' ),
-			'popular_items'              => __( 'Popular Categories', 'the-post-grid-api' ),
-			'all_items'                  => __( 'All Categories', 'the-post-grid-api' ),
-			'parent_item'                => null,
-			'parent_item_colon'          => null,
-			'edit_item'                  => __( 'Edit Category', 'the-post-grid-api' ),
-			'update_item'                => __( 'Update Category', 'the-post-grid-api' ),
-			'add_new_item'               => __( 'Add New Category', 'the-post-grid-api' ),
-			'new_item_name'              => __( 'New Category Name', 'the-post-grid-api' ),
-			'separate_items_with_commas' => __( 'Separate categories with commas', 'the-post-grid-api' ),
-			'add_or_remove_items'        => __( 'Add or remove categories', 'the-post-grid-api' ),
-			'choose_from_most_used'      => __( 'Choose from the most used categories', 'the-post-grid-api' ),
-			'not_found'                  => __( 'No categories found.', 'the-post-grid-api' ),
-			'menu_name'                  => __( 'Categories', 'the-post-grid-api' ),
-		];
+		$taxonomies = [
+			[
+				'post_type'   => rtTPGApi()->post_type,
+				'taxonomy_id' => rtTPGApi()->taxonomy1,
+				'singular'    => 'Category',
+				'plural'      => 'Categories',
+			],
+			[
+				'post_type'   => rtTPGApi()->post_type,
+				'taxonomy_id' => rtTPGApi()->taxonomy2,
+				'singular'    => 'Status',
+				'plural'      => 'Status',
+			],
 
-		$args = [
-			'hierarchical'          => true,
-			'labels'                => $labels,
-			'show_ui'               => true,
-			'show_admin_column'     => true,
-			'update_count_callback' => '_update_tpg_layout_term_count',
-			'query_var'             => true,
-			'show_in_rest'      => true,
-			'rewrite'               => [ 'slug' => 'writer' ],
 		];
+		foreach ( $taxonomies as $tax ) {
+			$labels = [
+				"name"                       => _x( $tax["plural"], "taxonomy {$tax["singular"]} name", "the-post-grid-api" ),
+				"singular_name"              => _x( $tax["singular"], "taxonomy singular name", "the-post-grid-api" ),
+				"search_items"               => __( "Search {$tax["plural"]}", "the-post-grid-api" ),
+				"popular_items"              => __( "Popular {$tax["plural"]}", "the-post-grid-api" ),
+				"all_items"                  => __( "All {$tax["plural"]}", "the-post-grid-api" ),
+				"parent_item"                => null,
+				"parent_item_colon"          => null,
+				"edit_item"                  => __( "Edit {$tax["singular"]}", "the-post-grid-api" ),
+				"update_item"                => __( "Update {$tax["singular"]}", "the-post-grid-api" ),
+				"add_new_item"               => __( "Add New {$tax["singular"]}", "the-post-grid-api" ),
+				"new_item_name"              => __( "New {$tax["singular"]} Name", "the-post-grid-api" ),
+				"separate_items_with_commas" => __( "Separate {$tax["plural"]} with commas", "the-post-grid-api" ),
+				"add_or_remove_items"        => __( "Add or remove {$tax["plural"]}", "the-post-grid-api" ),
+				"choose_from_most_used"      => __( "Choose from the most used {$tax["plural"]}", "the-post-grid-api" ),
+				"not_found"                  => __( "No {$tax["plural"]} found.", "the-post-grid-api" ),
+				"menu_name"                  => __( $tax["plural"], "the-post-grid-api" ),
+			];
 
-		register_taxonomy( rtTPGApi()->taxonomy1, rtTPGApi()->post_type, $args );
+			$args = [
+				"hierarchical"          => true,
+				"labels"                => $labels,
+				"show_ui"               => true,
+				"show_admin_column"     => true,
+				"update_count_callback" => "_update_tpg_layout_term_count",
+				"query_var"             => true,
+				"show_in_rest"          => true,
+				"rewrite"               => [ "slug" => "writer" ],
+			];
+
+			register_taxonomy( $tax['taxonomy_id'], $tax['post_type'], $args );
+		}
 	}
 
 }

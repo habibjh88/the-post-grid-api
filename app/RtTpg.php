@@ -37,6 +37,7 @@ if ( ! class_exists( RtTpgApi::class ) ) {
 		 */
 		public $post_type = 'tpg_layout';
 		public $taxonomy1 = 'tpg_layout_category';
+		public $taxonomy2 = 'tpg_layout_status';
 
 		/**
 		 * Options
