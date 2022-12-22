@@ -98,7 +98,7 @@ class SettingsController {
 			return;
 		}
 
-		if ( ( isset( $_GET['page'] ) && 'tpg_api_settings' !== $_GET['page'] ) || rtTPGApi()->post_type !== $typenow ) {
+		if ( ( isset( $_GET['page'] ) && 'tpg_api_settings' !== $_GET['page'] ) || rtTPGApi()->post_type_layout !== $typenow ) {
 			return;
 		}
 
@@ -141,7 +141,7 @@ class SettingsController {
 		if ( ! in_array( $pagenow, [ 'edit.php' ], true ) ) {
 			return;
 		}
-		if ( rtTPGApi()->post_type !== $typenow ) {
+		if ( rtTPGApi()->post_type_layout !== $typenow ) {
 			return;
 		}
 
@@ -188,7 +188,7 @@ class SettingsController {
 	 */
 	public function register() {
 		add_submenu_page(
-			'edit.php?post_type=' . rtTPGApi()->post_type,
+			'edit.php?post_type=' . rtTPGApi()->post_type_layout,
 			esc_html__( 'Settings', 'the-post-grid-api' ),
 			esc_html__( 'Settings', 'the-post-grid-api' ),
 			'administrator',
@@ -197,7 +197,7 @@ class SettingsController {
 		);
 
 		add_submenu_page(
-			'edit.php?post_type=' . rtTPGApi()->post_type,
+			'edit.php?post_type=' . rtTPGApi()->post_type_layout,
 			esc_html__( 'Get Help', 'the-post-grid-api' ),
 			esc_html__( 'Get Help', 'the-post-grid-api' ),
 			'administrator',

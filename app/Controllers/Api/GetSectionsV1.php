@@ -7,22 +7,22 @@
 
 namespace RT\ThePostGridAPI\Controllers\Api;
 
-class GetLayoutsV1 {
+class GetSectionsV1 {
 	public function __construct() {
 		add_action( "rest_api_init", [ $this, 'register_post_route' ] );
 	}
 
 	public function register_post_route() {
-		register_rest_route( 'rttpgapi/v1', 'layouts', [
+		register_rest_route( 'rttpgapi/v1', 'sections', [
 			'methods'             => 'POST',
-			'callback'            => [ $this, 'get_all_posts' ],
+			'callback'            => [ $this, 'get_all_sections' ],
 			'permission_callback' => function () {
 				return true;
 			}
 		] );
 	}
 
-	public function get_all_posts( $data ) {
+	public function get_all_sections( $data ) {
 		$args = [
 			'post_type'      => rtTPGApi()->post_type_layout,
 			'posts_per_page' => - 1,

@@ -30,14 +30,16 @@ if ( ! class_exists( RtTpgApi::class ) ) {
 	 */
 	final class RtTpgApi {
 
-		/**
-		 * Post Type
-		 *
-		 * @var string
-		 */
-		public $post_type = 'tpg_layout';
-		public $taxonomy1 = 'tpg_layout_category';
-		public $taxonomy2 = 'tpg_layout_status';
+		//Layout post type and taxonomy
+		public $post_type_layout = 'tpg_layout';
+		public $layout_category = 'layout_category';
+		public $layout_status = 'layout_status';
+
+		//Layout post type and taxonomy
+		public $post_type_section = 'tpg_section';
+		public $section_category = 'section_category';
+		public $section_status = 'section_status';
+
 
 		/**
 		 * Options

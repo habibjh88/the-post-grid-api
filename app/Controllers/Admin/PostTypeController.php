@@ -22,7 +22,6 @@ class PostTypeController {
 	public function __construct() {
 		add_action( 'init', [ $this, 'register_post_types' ], 1 );
 		add_action( 'init', [ $this, 'register_taxonomy' ], 1 );
-
 	}
 
 	/**
@@ -31,38 +30,59 @@ class PostTypeController {
 	 * @return void
 	 */
 	public function register_post_types() {
-		$labels = [
-			'name'               => esc_html__( 'TPG Layouts', 'the-post-grid-api' ),
-			'singular_name'      => esc_html__( 'TPG Layout', 'the-post-grid-api' ),
-			'add_new'            => esc_html__( 'Add New Layout', 'the-post-grid-api' ),
-			'all_items'          => esc_html__( 'All Layouts', 'the-post-grid-api' ),
-			'add_new_item'       => esc_html__( 'Add New Layout', 'the-post-grid-api' ),
-			'edit_item'          => esc_html__( 'Edit Layout', 'the-post-grid-api' ),
-			'new_item'           => esc_html__( 'New Layout', 'the-post-grid-api' ),
-			'view_item'          => esc_html__( 'View Layout', 'the-post-grid-api' ),
-			'search_items'       => esc_html__( 'Search Layouts', 'the-post-grid-api' ),
-			'not_found'          => esc_html__( 'No Layouts found', 'the-post-grid-api' ),
-			'not_found_in_trash' => esc_html__( 'No Layouts found in Trash', 'the-post-grid-api' ),
+
+		$all_post_type = [
+			[
+				'post_type' => rtTPGApi()->post_type_layout,
+				'singular'  => 'Layout',
+				'plural'    => 'Layouts',
+				'slug'      => 'layouts',
+				'icon'      => 'dashicons-layout'
+			],
+			[
+				'post_type' => rtTPGApi()->post_type_section,
+				'singular'  => 'Section',
+				'plural'    => 'Sections',
+				'slug'      => 'sections',
+				'icon'      => 'dashicons-archive'
+			],
 		];
 
+		foreach ( $all_post_type as $post_type ) {
 
-		$args = [
-			'labels'             => $labels,
-			'public'             => true,
-			'publicly_queryable' => true,
-			'show_ui'            => true,
-			'show_in_menu'       => true,
-			'query_var'          => true,
-			'rewrite'            => [ 'slug' => 'layouts' ],
-			'capability_type'    => 'page',
-			'has_archive'        => true,
-			'hierarchical'       => true,
-			'show_in_rest'       => true,
-			'menu_position'      => 22,
-			'supports'           => [ 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ],
-		];
+			$labels = [
+				"name"               => esc_html__( $post_type['plural'], "the-post-grid-api" ),
+				"singular_name"      => esc_html__( $post_type['singular'], "the-post-grid-api" ),
+				"add_new"            => esc_html__( "Add New {$post_type['singular']}", "the-post-grid-api" ),
+				"all_items"          => esc_html__( "All {$post_type['plural']}", "the-post-grid-api" ),
+				"add_new_item"       => esc_html__( "Add New {$post_type['singular']}", "the-post-grid-api" ),
+				"edit_item"          => esc_html__( "Edit {$post_type['singular']}", "the-post-grid-api" ),
+				"new_item"           => esc_html__( "New {$post_type['singular']}", "the-post-grid-api" ),
+				"view_item"          => esc_html__( "View {$post_type['singular']}", "the-post-grid-api" ),
+				"search_items"       => esc_html__( "Search {$post_type['plural']}", "the-post-grid-api" ),
+				"not_found"          => esc_html__( "No {$post_type['plural']} found", "the-post-grid-api" ),
+				"not_found_in_trash" => esc_html__( "No {$post_type['plural']} found in Trash", "the-post-grid-api" ),
+			];
 
-		register_post_type( rtTPGApi()->post_type, $args );
+			$args = [
+				'labels'             => $labels,
+				'public'             => true,
+				'publicly_queryable' => true,
+				'show_ui'            => true,
+				'show_in_menu'       => true,
+				'query_var'          => true,
+				'rewrite'            => [ 'slug' => $post_type['slug'] ],
+				'capability_type'    => 'page',
+				'menu_icon'          => $post_type['icon'],
+				'has_archive'        => true,
+				'hierarchical'       => true,
+				'show_in_rest'       => true,
+				'menu_position'      => 22,
+				'supports'           => [ 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ],
+			];
+
+			register_post_type( $post_type['post_type'], $args );
+		}
 
 	}
 
@@ -73,17 +93,32 @@ class PostTypeController {
 	function register_taxonomy() {
 		$taxonomies = [
 			[
-				'post_type'   => rtTPGApi()->post_type,
-				'taxonomy_id' => rtTPGApi()->taxonomy1,
+				'post_type'   => rtTPGApi()->post_type_layout,
+				'taxonomy_id' => rtTPGApi()->layout_category,
 				'singular'    => 'Category',
 				'plural'      => 'Categories',
 			],
 			[
-				'post_type'   => rtTPGApi()->post_type,
-				'taxonomy_id' => rtTPGApi()->taxonomy2,
+				'post_type'   => rtTPGApi()->post_type_layout,
+				'taxonomy_id' => rtTPGApi()->layout_status,
 				'singular'    => 'Status',
 				'plural'      => 'Status',
 			],
+
+			[
+				'post_type'   => rtTPGApi()->post_type_section,
+				'taxonomy_id' => rtTPGApi()->section_category,
+				'singular'    => 'Category',
+				'plural'      => 'Categories',
+			],
+
+			[
+				'post_type'   => rtTPGApi()->post_type_section,
+				'taxonomy_id' => rtTPGApi()->section_status,
+				'singular'    => 'Status',
+				'plural'      => 'Status',
+			],
+
 
 		];
 		foreach ( $taxonomies as $tax ) {
