@@ -146,7 +146,6 @@ class PostTypeController {
 				"labels"                => $labels,
 				"show_ui"               => true,
 				"show_admin_column"     => true,
-				"update_count_callback" => "_update_tpg_layout_term_count",
 				"query_var"             => true,
 				"show_in_rest"          => true,
 				"rewrite"               => [ "slug" => "writer" ],

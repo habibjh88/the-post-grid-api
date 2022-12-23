@@ -14,6 +14,6 @@ class RestApi {
 	 */
 	public function __construct() {
 		new GetLayoutsV1();
-		new GetSectionsV1();
+//		new GetSectionsV1();
 	}
 }

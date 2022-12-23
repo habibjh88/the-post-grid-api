@@ -35,6 +35,7 @@ if ((!process.env.npm_config_block && !process.env.npm_config_package) && (proce
     }
 
     mix.js( 'src/scripts/app.js', 'assets/js/' )
+    mix.js( 'src/scripts/admin.js', 'assets/js/' )
     mix.sass( 'src/scss/style.scss', 'assets/css/' )
     mix.sass( 'src/scss/admin.scss', 'assets/css/' )
         .options( {

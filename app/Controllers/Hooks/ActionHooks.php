@@ -21,7 +21,9 @@ class ActionHooks {
 	 *
 	 * @return void
 	 */
+
 	public static function init() {
 
 	}
+
 }

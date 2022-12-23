@@ -87,6 +87,7 @@ class ScriptController {
 
 		$styles['tpgapi-tpg-admin'] = rtTPGApi()->get_assets_uri( 'css/admin.css' );
 
+		wp_enqueue_media();
 
 		foreach ( $scripts as $script ) {
 			wp_enqueue_script( $script['handle'], $script['src'], $script['deps'], isset( $script['version'] ) ? $script['version'] : $this->version, $script['footer'] );
@@ -95,6 +96,9 @@ class ScriptController {
 		foreach ( $styles as $k => $v ) {
 			wp_enqueue_style( $k, $v, false, isset( $script['version'] ) ? $script['version'] : $this->version );
 		}
+
+		wp_enqueue_script( 'meta-image' );
+
 	}
 
 	/**

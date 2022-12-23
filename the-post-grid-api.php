@@ -5,7 +5,7 @@
  * Description: This plugin created only for
  * Author: RadiusTheme
  * Version: 1.0.0
- * Text Domain: the-post-grid
+ * Text Domain: the-post-grid-api
  * Domain Path: /languages
  * Author URI: https://radiustheme.com/
  *

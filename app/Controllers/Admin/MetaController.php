@@ -11,7 +11,7 @@ namespace RT\ThePostGridAPI\Controllers\Admin;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'This script cannot be accessed directly.' );
 }
-
+use RT\ThePostGridAPI\Controllers\Admin\Meta\TaxonomyMeta;
 /**
  * Meta Controller class.
  */
@@ -20,7 +20,7 @@ class MetaController {
 	 * Class constructor
 	 */
 	public function __construct() {
-
+		new TaxonomyMeta();
 	}
 
 
