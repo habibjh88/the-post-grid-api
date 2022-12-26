@@ -182,8 +182,7 @@ class SettingsController {
 	}
 
 	/**
-	 * Submenu
-	 *
+	 * Register
 	 * @return void
 	 */
 	public function register() {

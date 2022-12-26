@@ -99,7 +99,7 @@ class PostTypeController {
 				'plural'      => 'Categories',
 			],
 			[
-				'post_type'   => rtTPGApi()->post_type_layout,
+				'post_type'   => [rtTPGApi()->post_type_layout, rtTPGApi()->post_type_section],
 				'taxonomy_id' => rtTPGApi()->layout_status,
 				'singular'    => 'Status',
 				'plural'      => 'Status',
@@ -112,12 +112,12 @@ class PostTypeController {
 				'plural'      => 'Categories',
 			],
 
-			[
-				'post_type'   => rtTPGApi()->post_type_section,
-				'taxonomy_id' => rtTPGApi()->section_status,
-				'singular'    => 'Status',
-				'plural'      => 'Status',
-			],
+//			[
+//				'post_type'   => rtTPGApi()->post_type_section,
+//				'taxonomy_id' => rtTPGApi()->section_status,
+//				'singular'    => 'Status',
+//				'plural'      => 'Status',
+//			],
 
 
 		];

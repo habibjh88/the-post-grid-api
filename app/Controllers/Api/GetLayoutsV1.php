@@ -25,7 +25,7 @@ class GetLayoutsV1 {
 	public function get_all_posts( $data ) {
 
 		$send_data = [
-			'success' => 'ok',
+			'success'  => 'ok',
 			'layouts'  => [
 				'posts'    => [],
 				'category' => [],
@@ -74,7 +74,7 @@ class GetLayoutsV1 {
 				$pCount ++;
 			}
 		} else {
-			$send_data['success']                             = 'error';
+			$send_data['success']                     = 'error';
 			$send_data['layouts']['posts']['message'] = __( "No posts found", "the-post-grid-api" );
 		}
 
@@ -116,13 +116,55 @@ class GetLayoutsV1 {
 				$pCount ++;
 			}
 		} else {
-			$send_data['success']                              = 'error';
+			$send_data['success']                      = 'error';
 			$send_data['sections']['posts']['message'] = __( "No posts found", "the-post-grid-api" );
 		}
 
 		wp_reset_postdata();
 
-		error_log( print_r( $send_data, true ) . "\n\n", 3, __DIR__ . '/log.txt' );
+
+		$terms = get_terms( [
+			'taxonomy'   => rtTPGApi()->layout_category,
+			'hide_empty' => false,
+			'parent'     => 0
+		] );
+
+		foreach ( $terms as $term ) {
+
+			$termchildren       = get_term_children( $term->term_id, rtTPGApi()->layout_category );
+			$parent_term_bg_url = get_term_meta( $term->term_id, rtTPGApi()->rttpg_cat_thumbnail, true );
+			$child_terms        = [];
+			if ( ! empty( $termchildren ) ) {
+				foreach ( $termchildren as $cterm ) {
+					$term_bg_url   = get_term_meta( $cterm, rtTPGApi()->rttpg_cat_thumbnail, true );
+					$child_term    = get_term( $cterm, rtTPGApi()->layout_category );
+					$child_terms[] = [
+						'term_id' => $child_term->term_id,
+						'slug'    => $child_term->slug,
+						'name'    => $child_term->name,
+						'image'   => $term_bg_url ? wp_get_attachment_image_src( $term_bg_url, 'full' )[0] : ''
+					];
+				}
+			}
+
+			$send_data['layouts']['category'][] = [
+				'term_id' => $term->term_id,
+				'slug'    => $term->slug,
+				'name'    => $term->name,
+				'image'   => $parent_term_bg_url ? wp_get_attachment_image_src( $parent_term_bg_url, 'full' )[0] : '',
+				'child'   => ! empty( $child_terms ) ? $child_terms : 'no'
+			];
+
+		}
+
+		$terms2 = get_terms( [
+			'taxonomy'   => rtTPGApi()->section_category,
+			'hide_empty' => false,
+		] );
+
+		foreach ( $terms2 as $term ) {
+			$send_data['sections']['category'][] = $term;
+		}
 
 		return rest_ensure_response( $send_data );
 	}

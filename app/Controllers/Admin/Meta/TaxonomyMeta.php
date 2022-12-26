@@ -21,10 +21,8 @@ class TaxonomyMeta {
 	 *
 	 * @return void
 	 */
-	public $cat_thumbnail_key;
 
 	public function __construct() {
-		$this->cat_thumbnail_key = 'rttpg_cat_thumbnail';
 		add_filter( 'manage_edit-layout_category_columns', [ $this, 'edit_term_columns' ], 10, 3 );
 		add_filter( 'manage_layout_category_custom_column', [ $this, 'manage_term_custom_column' ], 10, 3 );
 		add_action( 'layout_category_add_form_fields', [ $this, 'add_category_image' ], 10, 2 );
@@ -45,7 +43,7 @@ class TaxonomyMeta {
 	 */
 	public function edit_term_columns( $columns ) {
 
-		$columns[ $this->cat_thumbnail_key ] = esc_html__( 'Image', 'the-post-grid-api' );
+		$columns[ rtTPGApi()->rttpg_cat_thumbnail ] = esc_html__( 'Image', 'the-post-grid-api' );
 
 		return $columns;
 	}
@@ -58,8 +56,8 @@ class TaxonomyMeta {
 	 * @return mixed|string
 	 */
 	public function manage_term_custom_column( $out, $column, $term_id ) {
-		if ( $this->cat_thumbnail_key === $column ) {
-			$value = get_term_meta( $term_id, $this->cat_thumbnail_key, true );
+		if ( rtTPGApi()->rttpg_cat_thumbnail === $column ) {
+			$value = get_term_meta( $term_id, rtTPGApi()->rttpg_cat_thumbnail, true );
 			if ( $value ) {
 				$out = '<img style="width:50px;height:50px" src=' . wp_get_attachment_image_src( $value, 'thumbnail' )[0] . ' width="200" />';
 			}
@@ -78,8 +76,8 @@ class TaxonomyMeta {
 	*/
 	public function add_category_image( $taxonomy ) { ?>
         <div class="form-field term-group">
-            <label for="<?php echo esc_attr( $this->cat_thumbnail_key ) ?>"><?php _e( 'Image', 'hero-theme' ); ?></label>
-            <input type="hidden" id="<?php echo esc_attr( $this->cat_thumbnail_key ) ?>" name="<?php echo esc_attr( $this->cat_thumbnail_key ) ?>" class="custom_media_url" value="">
+            <label for="<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>"><?php _e( 'Image', 'hero-theme' ); ?></label>
+            <input type="hidden" id="<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>" name="<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>" class="custom_media_url" value="">
             <div id="category-image-wrapper"></div>
             <p>
                 <input type="button" class="button button-secondary rttpg_media_button" id="rttpg_media_button" name="rttpg_media_button" value="<?php _e( 'Add Image', 'hero-theme' ); ?>"/>
@@ -94,9 +92,9 @@ class TaxonomyMeta {
 	 * @since 1.0.0
 	*/
 	public function save_category_image( $term_id, $tt_id ) {
-		if ( isset( $_POST[ $this->cat_thumbnail_key ] ) && '' !== $_POST[ $this->cat_thumbnail_key ] ) {
-			$image = $_POST[ $this->cat_thumbnail_key ];
-			add_term_meta( $term_id, $this->cat_thumbnail_key, $image, true );
+		if ( isset( $_POST[ rtTPGApi()->rttpg_cat_thumbnail ] ) && '' !== $_POST[ rtTPGApi()->rttpg_cat_thumbnail ] ) {
+			$image = $_POST[ rtTPGApi()->rttpg_cat_thumbnail ];
+			add_term_meta( $term_id, rtTPGApi()->rttpg_cat_thumbnail, $image, true );
 		}
 	}
 
@@ -107,11 +105,11 @@ class TaxonomyMeta {
 	public function update_category_image( $term, $taxonomy ) { ?>
         <tr class="form-field term-group-wrap">
             <th scope="row">
-                <label for="<?php echo esc_attr( $this->cat_thumbnail_key ) ?>"><?php _e( 'Image', 'hero-theme' ); ?></label>
+                <label for="<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>"><?php _e( 'Image', 'hero-theme' ); ?></label>
             </th>
             <td>
-				<?php $image_id = get_term_meta( $term->term_id, $this->cat_thumbnail_key, true ); ?>
-                <input type="hidden" id="<?php echo $this->cat_thumbnail_key; ?>" name="<?php echo esc_attr( $this->cat_thumbnail_key ) ?>" value="<?php echo $image_id; ?>">
+				<?php $image_id = get_term_meta( $term->term_id, rtTPGApi()->rttpg_cat_thumbnail, true ); ?>
+                <input type="hidden" id="<?php echo rtTPGApi()->rttpg_cat_thumbnail; ?>" name="<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>" value="<?php echo $image_id; ?>">
                 <div id="category-image-wrapper">
 					<?php if ( $image_id ) { ?>
 						<?php echo wp_get_attachment_image( $image_id, 'thumbnail' ); ?>
@@ -131,11 +129,11 @@ class TaxonomyMeta {
 	 * @since 1.0.0
 	 */
 	public function updated_category_image( $term_id, $tt_id ) {
-		if ( isset( $_POST[ $this->cat_thumbnail_key ] ) && '' !== $_POST[ $this->cat_thumbnail_key ] ) {
-			$image = $_POST[ $this->cat_thumbnail_key ];
-			update_term_meta( $term_id, $this->cat_thumbnail_key, $image );
+		if ( isset( $_POST[ rtTPGApi()->rttpg_cat_thumbnail ] ) && '' !== $_POST[ rtTPGApi()->rttpg_cat_thumbnail ] ) {
+			$image = $_POST[ rtTPGApi()->rttpg_cat_thumbnail ];
+			update_term_meta( $term_id, rtTPGApi()->rttpg_cat_thumbnail, $image );
 		} else {
-			update_term_meta( $term_id, $this->cat_thumbnail_key, '' );
+			update_term_meta( $term_id, rtTPGApi()->rttpg_cat_thumbnail, '' );
 		}
 	}
 
@@ -156,7 +154,7 @@ class TaxonomyMeta {
                         _custom_media = true;
                         wp.media.editor.send.attachment = function (props, attachment) {
                             if (_custom_media) {
-                                $('#<?php echo esc_attr( $this->cat_thumbnail_key ) ?>').val(attachment.id);
+                                $('#<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>').val(attachment.id);
                                 $('#category-image-wrapper').html('<img class="custom_media_image" src="" style="margin:0;padding:0;max-height:100px;float:none;" />');
                                 $('#category-image-wrapper .custom_media_image').attr('src', attachment.url).css('display', 'block');
                             } else {
@@ -170,7 +168,7 @@ class TaxonomyMeta {
 
                 ct_media_upload('.rttpg_media_button.button');
                 $('body').on('click', '.rttpg_media_remove', function () {
-                    $('#<?php echo esc_attr( $this->cat_thumbnail_key ) ?>').val('');
+                    $('#<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>').val('');
                     $('#category-image-wrapper').html('<img class="custom_media_image" src="" style="margin:0;padding:0;max-height:100px;float:none;" />');
                 });
                 // Thanks: http://stackoverflow.com/questions/15281995/wordpress-create-category-ajax-response
