@@ -130,7 +130,6 @@ class GetLayoutsV1 {
 		] );
 
 		foreach ( $terms as $term ) {
-
 			$termchildren       = get_term_children( $term->term_id, rtTPGApi()->layout_category );
 			$parent_term_bg_url = get_term_meta( $term->term_id, rtTPGApi()->rttpg_cat_thumbnail, true );
 			$child_terms        = [];
@@ -139,10 +138,11 @@ class GetLayoutsV1 {
 					$term_bg_url   = get_term_meta( $cterm, rtTPGApi()->rttpg_cat_thumbnail, true );
 					$child_term    = get_term( $cterm, rtTPGApi()->layout_category );
 					$child_terms[] = [
-						'term_id' => $child_term->term_id,
-						'slug'    => $child_term->slug,
-						'name'    => $child_term->name,
-						'image'   => $term_bg_url ? wp_get_attachment_image_src( $term_bg_url, 'full' )[0] : ''
+						'parent_term' => $term->slug,
+						'term_id'     => $child_term->term_id,
+						'slug'        => $child_term->slug,
+						'name'        => $child_term->name,
+						'image'       => $term_bg_url ? wp_get_attachment_image_src( $term_bg_url, 'full' )[0] : ''
 					];
 				}
 			}
@@ -163,7 +163,13 @@ class GetLayoutsV1 {
 		] );
 
 		foreach ( $terms2 as $term ) {
-			$send_data['sections']['category'][] = $term;
+
+			$send_data['sections']['category'][] = [
+				'term_id' => $term->term_id,
+				'slug'    => $term->slug,
+				'name'    => $term->name,
+				'count'   => '',
+			];
 		}
 
 		return rest_ensure_response( $send_data );
