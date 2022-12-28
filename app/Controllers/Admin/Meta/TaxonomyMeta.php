@@ -44,6 +44,7 @@ class TaxonomyMeta {
 	public function edit_term_columns( $columns ) {
 
 		$columns[ rtTPGApi()->rttpg_cat_thumbnail ] = esc_html__( 'Image', 'the-post-grid-api' );
+		$columns[ rtTPGApi()->rttpg_cat_status ]    = esc_html__( 'Status', 'the-post-grid-api' );
 
 		return $columns;
 	}
@@ -63,6 +64,13 @@ class TaxonomyMeta {
 			}
 		}
 
+		if ( rtTPGApi()->rttpg_cat_status === $column ) {
+			$value = get_term_meta( $term_id, rtTPGApi()->rttpg_cat_status, true );
+			if ( $value ) {
+				$out = "<span>{$value}</span>";
+			}
+		}
+
 		return $out;
 	}
 
@@ -76,13 +84,21 @@ class TaxonomyMeta {
 	*/
 	public function add_category_image( $taxonomy ) { ?>
         <div class="form-field term-group">
-            <label for="<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>"><?php _e( 'Image', 'hero-theme' ); ?></label>
-            <input type="hidden" id="<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>" name="<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>" class="custom_media_url" value="">
+            <label for="<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>"><?php _e( 'Image', 'the-post-grid-api' ); ?></label>
+            <input type="hidden" id="<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>" name="<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>" class="rttpg-cat-status" value="">
             <div id="category-image-wrapper"></div>
             <p>
-                <input type="button" class="button button-secondary rttpg_media_button" id="rttpg_media_button" name="rttpg_media_button" value="<?php _e( 'Add Image', 'hero-theme' ); ?>"/>
-                <input type="button" class="button button-secondary rttpg_media_remove" id="rttpg_media_remove" name="rttpg_media_remove" value="<?php _e( 'Remove Image', 'hero-theme' ); ?>"/>
+                <input type="button" class="button button-secondary rttpg_media_button" id="rttpg_media_button" name="rttpg_media_button" value="<?php _e( 'Add Image', 'the-post-grid-api' ); ?>"/>
+                <input type="button" class="button button-secondary rttpg_media_remove" id="rttpg_media_remove" name="rttpg_media_remove" value="<?php _e( 'Remove Image', 'the-post-grid-api' ); ?>"/>
             </p>
+        </div>
+
+        <div class="form-field term-group">
+            <label for="<?php echo esc_attr( rtTPGApi()->rttpg_cat_status ) ?>"><?php _e( 'Status', 'the-post-grid-api' ); ?></label>
+            <select style="min-width: 100px" name="<?php echo esc_attr( rtTPGApi()->rttpg_cat_status ) ?>" id="<?php echo esc_attr( rtTPGApi()->rttpg_cat_status ) ?>">
+                <option value="pro"><?php echo esc_html('Pro') ?></option>
+                <option value="free"><?php echo esc_html('Free') ?></option>
+            </select>
         </div>
 		<?php
 	}
@@ -96,6 +112,11 @@ class TaxonomyMeta {
 			$image = $_POST[ rtTPGApi()->rttpg_cat_thumbnail ];
 			add_term_meta( $term_id, rtTPGApi()->rttpg_cat_thumbnail, $image, true );
 		}
+
+		if ( isset( $_POST[ rtTPGApi()->rttpg_cat_status ] ) && '' !== $_POST[ rtTPGApi()->rttpg_cat_status ] ) {
+			$status = $_POST[ rtTPGApi()->rttpg_cat_status ];
+			add_term_meta( $term_id, rtTPGApi()->rttpg_cat_status, $status, true );
+		}
 	}
 
 	/*
@@ -105,7 +126,7 @@ class TaxonomyMeta {
 	public function update_category_image( $term, $taxonomy ) { ?>
         <tr class="form-field term-group-wrap">
             <th scope="row">
-                <label for="<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>"><?php _e( 'Image', 'hero-theme' ); ?></label>
+                <label for="<?php echo esc_attr( rtTPGApi()->rttpg_cat_thumbnail ) ?>"><?php _e( 'Image', 'the-post-grid-api' ); ?></label>
             </th>
             <td>
 				<?php $image_id = get_term_meta( $term->term_id, rtTPGApi()->rttpg_cat_thumbnail, true ); ?>
@@ -116,9 +137,22 @@ class TaxonomyMeta {
 					<?php } ?>
                 </div>
                 <p>
-                    <input type="button" class="button button-secondary rttpg_media_button" id="rttpg_media_button" name="rttpg_media_button" value="<?php _e( 'Add Image', 'hero-theme' ); ?>"/>
-                    <input type="button" class="button button-secondary rttpg_media_remove" id="rttpg_media_remove" name="rttpg_media_remove" value="<?php _e( 'Remove Image', 'hero-theme' ); ?>"/>
+                    <input type="button" class="button button-secondary rttpg_media_button" id="rttpg_media_button" name="rttpg_media_button" value="<?php _e( 'Add Image', 'the-post-grid-api' ); ?>"/>
+                    <input type="button" class="button button-secondary rttpg_media_remove" id="rttpg_media_remove" name="rttpg_media_remove" value="<?php _e( 'Remove Image', 'the-post-grid-api' ); ?>"/>
                 </p>
+            </td>
+        </tr>
+
+        <tr class="form-field term-group-wrap">
+            <th scope="row">
+                <label for="<?php echo esc_attr( rtTPGApi()->rttpg_cat_status ) ?>"><?php _e( 'Image', 'the-post-grid-api' ); ?></label>
+            </th>
+            <td>
+				<?php $status = get_term_meta( $term->term_id, rtTPGApi()->rttpg_cat_status, true ); ?>
+                <select style="min-width: 100px" name="<?php echo esc_attr( rtTPGApi()->rttpg_cat_status ) ?>" id="<?php echo esc_attr( rtTPGApi()->rttpg_cat_status ) ?>">
+                    <option <?php echo esc_attr($status=='pro' ? 'selected' : '') ?> value="pro"><?php echo esc_html('Pro') ?></option>
+                    <option <?php echo esc_attr($status=='free' ? 'selected' : '') ?> value="free"><?php echo esc_html('Free') ?></option>
+                </select>
             </td>
         </tr>
 		<?php
@@ -134,6 +168,13 @@ class TaxonomyMeta {
 			update_term_meta( $term_id, rtTPGApi()->rttpg_cat_thumbnail, $image );
 		} else {
 			update_term_meta( $term_id, rtTPGApi()->rttpg_cat_thumbnail, '' );
+		}
+
+		if ( isset( $_POST[ rtTPGApi()->rttpg_cat_status ] ) && '' !== $_POST[ rtTPGApi()->rttpg_cat_status ] ) {
+			$image = $_POST[ rtTPGApi()->rttpg_cat_status ];
+			update_term_meta( $term_id, rtTPGApi()->rttpg_cat_status, $image );
+		} else {
+			update_term_meta( $term_id, rtTPGApi()->rttpg_cat_status, '' );
 		}
 	}
 

@@ -6,14 +6,11 @@
  */
 namespace RT\ThePostGridAPI\Controllers\Api;
 
-
-
 class RestApi {
 	/**
 	 * Register rest route
 	 */
 	public function __construct() {
 		new GetLayoutsV1();
-//		new GetSectionsV1();
 	}
 }

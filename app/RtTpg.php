@@ -15,6 +15,7 @@ require_once __DIR__ . './../vendor/autoload.php';
 use RT\ThePostGridAPI\Controllers\Api\RestApi;
 use RT\ThePostGridAPI\Controllers\Admin\PostTypeController;
 use RT\ThePostGridAPI\Controllers\Admin\MetaController;
+
 //use RT\ThePostGridAPI\Controllers\Admin\SettingsController;
 use RT\ThePostGridAPI\Controllers\Admin\NoticeController;
 use RT\ThePostGridAPI\Controllers\Hooks\FilterHooks;
@@ -38,10 +39,10 @@ if ( ! class_exists( RtTpgApi::class ) ) {
 		//Layout post type and taxonomy
 		public $post_type_section = 'tpg_section';
 		public $section_category = 'section_category';
-		public $section_status = 'section_status';
 
 		//Term meta key
 		public $rttpg_cat_thumbnail = 'rttpg_cat_thumbnail';
+		public $rttpg_cat_status = 'rttpg_cat_status';
 
 
 		/**

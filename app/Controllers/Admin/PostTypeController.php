@@ -112,14 +112,6 @@ class PostTypeController {
 				'plural'      => 'Categories',
 			],
 
-//			[
-//				'post_type'   => rtTPGApi()->post_type_section,
-//				'taxonomy_id' => rtTPGApi()->section_status,
-//				'singular'    => 'Status',
-//				'plural'      => 'Status',
-//			],
-
-
 		];
 		foreach ( $taxonomies as $tax ) {
 			$labels = [
