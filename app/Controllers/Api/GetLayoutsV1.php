@@ -56,7 +56,7 @@ class GetLayoutsV1 {
 				$status_list         = get_the_terms( $id, rtTPGApi()->layout_status );
 				$status              = wp_list_pluck( $status_list, 'slug' );
 				$category_terms_list = get_the_terms( $id, rtTPGApi()->layout_category );
-				$category_terms      = wp_list_pluck( $category_terms_list, 'slug' );
+				$category_terms      = wp_list_pluck( $category_terms_list, 'term_id' );
 				$img_url             = esc_url_raw( get_the_post_thumbnail_url( $id, $data['image_size'] ) );
 
 
@@ -69,7 +69,7 @@ class GetLayoutsV1 {
 					"post_class"   => join( ' ', get_post_class( null, $id ) ),
 					"status"       => ! empty( $status ) ? $status[0] : '',
 					"preview_link" => get_the_permalink( $id ),
-					'type'         => 'layouts'
+					"type"         => 'layouts'
 				];
 
 				$pCount ++;
@@ -99,7 +99,7 @@ class GetLayoutsV1 {
 				$status_list         = get_the_terms( $id, rtTPGApi()->layout_status );
 				$status              = wp_list_pluck( $status_list, 'slug' );
 				$category_terms_list = get_the_terms( $id, rtTPGApi()->section_category );
-				$category_terms      = wp_list_pluck( $category_terms_list, 'slug' );
+				$category_terms      = wp_list_pluck( $category_terms_list, 'term_id' );
 				$img_url             = esc_url_raw( get_the_post_thumbnail_url( $id, $data['image_size'] ) );
 
 				$send_data['sections']['posts'][] = [
@@ -150,7 +150,7 @@ class GetLayoutsV1 {
 					$term_bg_url      = get_term_meta( $cterm, rtTPGApi()->rttpg_cat_thumbnail, true );
 					$child_term       = get_term( $cterm, rtTPGApi()->layout_category );
 					$child_terms[]    = [
-						'parent_term' => $term->slug,
+						'parent_term' => $term->term_id,
 						'term_id'     => $child_term->term_id,
 						'slug'        => $child_term->slug,
 						'name'        => $child_term->name,
