@@ -18,7 +18,7 @@
     "package": "npm run clean && npm run build && npm run dev && npm run prod && npm run dev --package",
     "clean": "rm -rf temp/*",
     "zip": "npm run package && npm run dev --zip",
-    "build": "wp-scripts build --entry ./src/blocks/index.js --output-path=assets/blocks",
+    "build": "wp-scripts build --entry ./src/gutenberg/index.js --output-path=assets/blocks",
     "format": "wp-scripts format",
     "lint:css": "wp-scripts lint-style",
     "lint:js": "wp-scripts lint-js",

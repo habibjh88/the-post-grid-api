@@ -98,7 +98,7 @@ class FilterHooks {
 	 *
 	 * @return mixed|string
 	 */
-	function template_callback( $file ) {
+	public static function template_callback( $file ) {
 		global $post;
 		if ( in_array( $post->post_type, [ rtTPGApi()->post_type_layout, rtTPGApi()->post_type_section ] ) ) {
 			$file_path = RT_THE_POST_GRID_API_PLUGIN_PATH . '/templates/single-layout.php'; //Actual file path
