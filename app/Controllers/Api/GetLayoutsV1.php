@@ -42,7 +42,9 @@ class GetLayoutsV1 {
 		$args = [
 			'post_type'      => [ rtTPGApi()->post_type_layout ],
 			'posts_per_page' => - 1,
-			'post_status'    => 'publish'
+			'post_status'    => 'publish',
+			'orderby'        => 'title',
+			'order'          => "ASC"
 		];
 
 		$layout_query = new \WP_Query( $args );
@@ -85,7 +87,9 @@ class GetLayoutsV1 {
 		$args = [
 			'post_type'      => [ rtTPGApi()->post_type_section ],
 			'posts_per_page' => - 1,
-			'post_status'    => 'publish'
+			'post_status'    => 'publish',
+			'orderby'        => 'title',
+			'order'          => "ASC"
 		];
 
 		$sections_query = new \WP_Query( $args );
@@ -152,7 +156,7 @@ class GetLayoutsV1 {
 					$term_bg_url      = get_term_meta( $cterm, rtTPGApi()->rttpg_cat_thumbnail, true );
 					$child_term       = get_term( $cterm, rtTPGApi()->layout_category );
 
-					$child_terms[]    = [
+					$child_terms[] = [
 						'parent_term' => $term->term_id,
 						'term_id'     => $child_term->term_id,
 						'slug'        => $child_term->slug,
