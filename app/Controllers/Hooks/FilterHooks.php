@@ -28,6 +28,41 @@ class FilterHooks {
 		add_filter( 'admin_body_class', [ __CLASS__, 'admin_body_class' ] );
 		add_filter( 'wp_kses_allowed_html', [ __CLASS__, 'tpg_custom_wpkses_post_tags' ], 10, 2 );
 		add_filter( 'single_template', [ __CLASS__, 'template_callback' ] );
+		add_filter( 'manage_edit-tpg_section_columns', [ __CLASS__, 'manage_posts_columns' ] );
+		add_filter( 'manage_edit-tpg_layout_columns', [ __CLASS__, 'manage_posts_columns' ] );
+		add_filter( 'manage_tpg_section_posts_custom_column', [ __CLASS__, 'manage_posts_custom_column' ], 10, 2 );
+		add_filter( 'manage_tpg_layout_posts_custom_column', [ __CLASS__, 'manage_posts_custom_column' ], 10, 2 );
+	}
+
+	/**
+	 * Add Thumbnail column in tpg_section
+	 *
+	 * @param $cols
+	 *
+	 * @return mixed
+	 */
+	public static function manage_posts_columns( $cols ) {
+		unset( $cols['date'] );
+		unset( $cols['comments'] );
+		$cols['thumbnail'] = __( 'Thumbnail', 'column-demo' );
+		$cols['date']      = "Date";
+
+		return $cols;
+	}
+
+	/**
+	 * Add Thumbnail in tpg_section
+	 *
+	 * @param $cols
+	 * @param $pid
+	 *
+	 * @return void
+	 */
+	public static function manage_posts_custom_column( $cols, $pid ) {
+		if ( 'thumbnail' == $cols ) {
+			$thumbnail = get_the_post_thumbnail( $pid, [ 50, 50 ] );
+			echo $thumbnail;
+		}
 	}
 
 	public static function tpg_custom_wpkses_post_tags( $tags, $context ) {
