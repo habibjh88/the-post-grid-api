@@ -129,51 +129,21 @@ class GetLayoutsV1 {
 
 		$terms = get_terms( [
 			'taxonomy'   => rtTPGApi()->layout_category,
-			'hide_empty' => false,
-			'parent'     => 0
+			'hide_empty' => true,
+			//'parent'     => 0 //get parent category only
 		] );
 
 		$total_term_count = 0;
 		foreach ( $terms as $term ) {
-
-
-			$termchildren       = get_term_children( $term->term_id, rtTPGApi()->layout_category );
+			$total_term_count   += $term->count;
 			$parent_term_bg_url = get_term_meta( $term->term_id, rtTPGApi()->rttpg_cat_thumbnail, true );
-			$child_terms        = [];
-			$term_count         = count( $termchildren );
-
-			if ( $term_count < 1 ) {
-				continue;
-			}
-
-			$total_term_count += $term_count;
-
-			if ( ! empty( $termchildren ) ) {
-				foreach ( $termchildren as $cterm ) {
-
-					$rttpg_cat_status = get_term_meta( $cterm, rtTPGApi()->rttpg_cat_status, true );
-					$term_bg_url      = get_term_meta( $cterm, rtTPGApi()->rttpg_cat_thumbnail, true );
-					$child_term       = get_term( $cterm, rtTPGApi()->layout_category );
-
-					$child_terms[] = [
-						'parent_term' => $term->term_id,
-						'term_id'     => $child_term->term_id,
-						'slug'        => $child_term->slug,
-						'name'        => $child_term->name,
-						'image'       => $term_bg_url ? wp_get_attachment_image_src( $term_bg_url, 'full' )[0] : '',
-						'status'      => $rttpg_cat_status,
-						'count'       => $child_term->count
-					];
-				}
-			}
 
 			$send_data['layouts']['category'][] = [
 				'term_id' => $term->term_id,
 				'slug'    => $term->slug,
 				'name'    => $term->name,
 				'image'   => $parent_term_bg_url ? wp_get_attachment_image_src( $parent_term_bg_url, 'full' )[0] : '',
-				'child'   => ! empty( $child_terms ) ? $child_terms : [],
-				'count'   => $term_count,
+				'count'   => $term->count,
 			];
 
 		}
@@ -181,7 +151,7 @@ class GetLayoutsV1 {
 
 		$terms2 = get_terms( [
 			'taxonomy'   => rtTPGApi()->section_category,
-			'hide_empty' => false,
+			'hide_empty' => true,
 		] );
 
 		$total_s_term_count = 0;
