@@ -61,7 +61,6 @@ class GetLayoutsV1 {
 				$category_terms      = wp_list_pluck( $category_terms_list, 'term_id' );
 				$img_url             = esc_url_raw( get_the_post_thumbnail_url( $id, $data['image_size'] ) );
 
-
 				$send_data['layouts']['posts'][] = [
 					"id"           => $id,
 					"content"      => get_the_content(),
