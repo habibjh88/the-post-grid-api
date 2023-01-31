@@ -126,11 +126,9 @@ class GetLayoutsV1 {
 
 		wp_reset_postdata();
 
-
 		$terms = get_terms( [
 			'taxonomy'   => rtTPGApi()->layout_category,
 			'hide_empty' => true,
-			//'parent'     => 0 //get parent category only
 		] );
 
 		$total_term_count = 0;
