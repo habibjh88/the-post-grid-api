@@ -4,7 +4,7 @@
  * Plugin URI: http://demo.radiustheme.com/wordpress/plugins/the-post-grid-demo-import/
  * Description: This plugin created only for
  * Author: RadiusTheme
- * Version: 1.0.0
+ * Version: 1.0.1
  * Text Domain: the-post-grid-api
  * Domain Path: /languages
  * Author URI: https://radiustheme.com/
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'This script cannot be accessed directly.' );
 }
 
-define( 'RT_THE_POST_GRID_API_VERSION', '1.0.0' );
+define( 'RT_THE_POST_GRID_API_VERSION', '1.0.1' );
 define( 'RT_THE_POST_GRID_API_AUTHOR', 'RadiusTheme' );
 define( 'RT_THE_POST_GRID_API_NAME', 'The Post Grid' );
 define( 'RT_THE_POST_GRID_API_PLUGIN_FILE', __FILE__ );
