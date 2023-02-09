@@ -43,8 +43,8 @@ class GetLayoutsV1 {
 			'post_type'      => [ rtTPGApi()->post_type_layout ],
 			'posts_per_page' => - 1,
 			'post_status'    => 'publish',
-			'orderby'        => 'title',
-			'order'          => "ASC"
+//			'orderby'        => 'title',
+//			'order'          => "ASC"
 		];
 
 		$layout_query = new \WP_Query( $args );
@@ -87,8 +87,8 @@ class GetLayoutsV1 {
 			'post_type'      => [ rtTPGApi()->post_type_section ],
 			'posts_per_page' => - 1,
 			'post_status'    => 'publish',
-			'orderby'        => 'title',
-			'order'          => "ASC"
+//			'orderby'        => 'title',
+//			'order'          => "ASC"
 		];
 
 		$sections_query = new \WP_Query( $args );
