@@ -34,8 +34,6 @@ class AjaxController {
 
 		if ( Fns::verifyNonce() ) {
 
-			//Do work here
-
 		} else {
 			$msg = esc_html__( 'Server Error !!', 'the-post-grid-api' );
 		}

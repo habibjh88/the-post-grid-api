@@ -1,0 +1,58 @@
+WP_Post Object
+(
+    [ID] => 8138
+    [post_author] => 1
+    [post_date] => 2023-03-13 12:07:30
+    [post_date_gmt] => 2023-03-13 12:07:30
+    [post_content] => 
+    [post_title] => asefasdfasdf
+    [post_excerpt] => 
+    [post_status] => publish
+    [comment_status] => open
+    [ping_status] => closed
+    [post_password] => 
+    [post_name] => asefasdfasdf
+    [to_ping] => 
+    [pinged] => 
+    [post_modified] => 2023-03-13 12:07:30
+    [post_modified_gmt] => 2023-03-13 12:07:30
+    [post_content_filtered] => 
+    [post_parent] => 0
+    [guid] => http://spectra.test/?post_type=tpg_layout&#038;p=8138
+    [menu_order] => 0
+    [post_type] => tpg_layout
+    [post_mime_type] => 
+    [comment_count] => 0
+    [filter] => raw
+)
+
+
+WP_Post Object
+(
+    [ID] => 8141
+    [post_author] => 1
+    [post_date] => 2023-03-13 12:15:08
+    [post_date_gmt] => 2023-03-13 12:15:08
+    [post_content] => 
+    [post_title] => asdfasdfasdfasdf
+    [post_excerpt] => 
+    [post_status] => publish
+    [comment_status] => open
+    [ping_status] => closed
+    [post_password] => 
+    [post_name] => asdfasdfasdfasdf
+    [to_ping] => 
+    [pinged] => 
+    [post_modified] => 2023-03-13 12:15:08
+    [post_modified_gmt] => 2023-03-13 12:15:08
+    [post_content_filtered] => 
+    [post_parent] => 0
+    [guid] => http://spectra.test/?post_type=tpg_layout&#038;p=8141
+    [menu_order] => 0
+    [post_type] => tpg_layout
+    [post_mime_type] => 
+    [comment_count] => 0
+    [filter] => raw
+)
+
+

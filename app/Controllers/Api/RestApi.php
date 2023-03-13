@@ -13,5 +13,6 @@ class RestApi {
 	public function __construct() {
 		new GetLayoutsV1();
 		new GetElLayoutsV1();
+		new CountLayouts();
 	}
 }

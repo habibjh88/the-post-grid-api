@@ -105,6 +105,7 @@ if ( ! class_exists( RtTpgApi::class ) ) {
 			ActionHooks::init();
 
 			$this->load_hooks();
+
 		}
 
 		/**
@@ -113,9 +114,7 @@ if ( ! class_exists( RtTpgApi::class ) ) {
 		 * @return void
 		 */
 		private function load_hooks() {
-			register_activation_hook( RT_THE_POST_GRID_API_PLUGIN_FILE, [ Install::class, 'activate' ] );
 			register_deactivation_hook( RT_THE_POST_GRID_API_PLUGIN_FILE, [ Install::class, 'deactivate' ] );
-
 			add_action( 'plugins_loaded', [ $this, 'on_plugins_loaded' ], - 1 );
 			add_action( 'init', [ $this, 'init_hooks' ], 0 );
 		}
