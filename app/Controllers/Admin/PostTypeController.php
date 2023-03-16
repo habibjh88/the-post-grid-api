@@ -98,12 +98,6 @@ class PostTypeController {
                 'singular'    => 'Category',
                 'plural'      => 'Categories',
             ],
-            [
-                'post_type'   => [ rtTPGApi()->post_type_layout, rtTPGApi()->post_type_section ],
-                'taxonomy_id' => rtTPGApi()->layout_status,
-                'singular'    => 'Status',
-                'plural'      => 'Status',
-            ],
 
             [
                 'post_type'   => rtTPGApi()->post_type_section,
@@ -112,7 +106,21 @@ class PostTypeController {
                 'plural'      => 'Categories',
             ],
 
+	        [
+		        'post_type'   => [ rtTPGApi()->post_type_layout ],
+		        'taxonomy_id' => rtTPGApi()->layout_status,
+		        'singular'    => 'Status',
+		        'plural'      => 'Status',
+	        ],
+
+	        [
+		        'post_type'   => [ rtTPGApi()->post_type_section ],
+		        'taxonomy_id' => rtTPGApi()->section_status,
+		        'singular'    => 'Status',
+		        'plural'      => 'Status',
+	        ],
         ];
+
         foreach ( $taxonomies as $tax ) {
             $labels = [
                 "name"                       => _x( $tax["plural"], "taxonomy {$tax["singular"]} name", "the-post-grid-api" ),

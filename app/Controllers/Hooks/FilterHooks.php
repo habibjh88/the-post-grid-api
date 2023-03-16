@@ -28,10 +28,56 @@ class FilterHooks {
 		add_filter( 'admin_body_class', [ __CLASS__, 'admin_body_class' ] );
 		add_filter( 'wp_kses_allowed_html', [ __CLASS__, 'tpg_custom_wpkses_post_tags' ], 10, 2 );
 		add_filter( 'single_template', [ __CLASS__, 'template_callback' ] );
+
+		// Modify Layout list table
 		add_filter( 'manage_edit-tpg_section_columns', [ __CLASS__, 'manage_posts_columns' ] );
 		add_filter( 'manage_edit-tpg_layout_columns', [ __CLASS__, 'manage_posts_columns' ] );
 		add_filter( 'manage_tpg_section_posts_custom_column', [ __CLASS__, 'manage_posts_custom_column' ], 10, 2 );
 		add_filter( 'manage_tpg_layout_posts_custom_column', [ __CLASS__, 'manage_posts_custom_column' ], 10, 2 );
+		add_filter( 'manage_edit-tpg_layout_sortable_columns', [ __CLASS__, 'my_sortable_columns' ] );
+
+		//TODO: sort order functionality
+		add_action('pre_get_posts', [__CLASS__,'my_sort_order']);
+
+	}
+
+	/**
+	 * @param $columns
+	 *
+	 * @return mixed
+	 */
+	public static function my_sortable_columns( $columns ) {
+		$columns['total_import'] = 'total_import';
+
+		return $columns;
+	}
+
+	/**
+	 * @param $query
+	 *
+	 * @return void
+	 */
+	public static function my_sort_order($query) {
+		if (!is_admin() || !$query->is_main_query() || $query->get('post_type') != 'tpg_layout') {
+			return;
+		}
+		global $wpdb;
+		$layout_table = $wpdb->prefix . 'tpg_layout_count';
+
+		$order_direction = 'ASC';
+		if(isset($_REQUEST['order']) && $_REQUEST['order'] == 'desc'){
+			$order_direction = 'DESC';
+		}
+
+		$prepared_statement = $wpdb->get_results(
+			"SELECT layout_id FROM {$layout_table} ORDER BY total_install {$order_direction}", ARRAY_A
+		);
+		$all_ids = wp_list_pluck($prepared_statement, 'layout_id');
+
+		if(isset($_REQUEST['orderby']) && $_REQUEST['orderby'] == 'total_import'){
+			$query->set( 'post__in', $all_ids );
+			$query->set('orderby', 'post__in');
+		}
 	}
 
 	/**
@@ -44,8 +90,9 @@ class FilterHooks {
 	public static function manage_posts_columns( $cols ) {
 		unset( $cols['date'] );
 		unset( $cols['comments'] );
-		$cols['thumbnail'] = __( 'Thumbnail', 'column-demo' );
-		$cols['date']      = "Date";
+		$cols['thumbnail']    = __( 'Thumbnail', 'column-demo' );
+		$cols['total_import'] = __( 'Total Import', 'column-demo' );
+		$cols['date']         = "Date";
 
 		return $cols;
 	}
@@ -62,6 +109,18 @@ class FilterHooks {
 		if ( 'thumbnail' == $cols ) {
 			$thumbnail = get_the_post_thumbnail( $pid, [ 50, 50 ] );
 			echo $thumbnail;
+		}
+		if ( 'total_import' == $cols ) {
+
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'tpg_layout_count';
+
+
+			$result = $wpdb->get_var( $wpdb->prepare( "SELECT total_install FROM $table_name WHERE layout_id = %s", $pid ) );
+
+
+
+			echo $result;
 		}
 	}
 

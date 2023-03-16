@@ -99,7 +99,7 @@ class GetLayoutsV1 {
 				$sections_query->the_post();
 				$id = get_the_id();
 
-				$status_list         = get_the_terms( $id, rtTPGApi()->layout_status );
+				$status_list         = get_the_terms( $id, rtTPGApi()->section_status );
 				$status              = wp_list_pluck( $status_list, 'slug' );
 				$category_terms_list = get_the_terms( $id, rtTPGApi()->section_category );
 				$category_terms      = wp_list_pluck( $category_terms_list, 'term_id' );

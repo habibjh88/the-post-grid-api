@@ -35,6 +35,7 @@ if ( ! class_exists( RtTpgApi::class ) ) {
 		public $post_type_layout = 'tpg_layout';
 		public $layout_category = 'layout_category';
 		public $layout_status = 'layout_status';
+		public $section_status = 'section_status';
 
 		//Layout post type and taxonomy
 		public $post_type_section = 'tpg_section';

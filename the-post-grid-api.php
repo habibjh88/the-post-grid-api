@@ -82,11 +82,7 @@ function rttpg_insert_data() {
 
 }
 
-if ( ! class_exists( 'rtTPG' ) ) {
-	require_once 'app/RtTpg.php';
-}
-//
-//function my_function_on_new_post( $post_id, $post, $update ) {
+
 function my_function_on_new_post( $new_status, $old_status, $post ) {
 	if ($new_status == 'publish' && $old_status != 'publish') {
 		error_log( print_r( $post , true ) . "\n\n" , 3, __DIR__ . '/log.txt' );
@@ -108,4 +104,7 @@ function my_function_on_new_post( $new_status, $old_status, $post ) {
 }
 
 add_action('transition_post_status', 'my_function_on_new_post', 10, 3);
-//add_action( 'wp_insert_post', 'my_function_on_new_post', 10, 3 );
+
+if ( ! class_exists( 'rtTPG' ) ) {
+	require_once 'app/RtTpg.php';
+}
