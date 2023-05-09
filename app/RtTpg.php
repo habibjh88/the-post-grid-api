@@ -53,9 +53,9 @@ if ( ! class_exists( RtTpgApi::class ) ) {
 		 */
 		public $options = [
 			'settings'          => 'rt_the_post_grid_settings',
-			'version'           => RT_THE_POST_GRID_API_VERSION,
+			'version'           => GT_USERS_API_VERSION,
 			'installed_version' => 'rt_the_post_grid_current_version',
-			'slug'              => RT_THE_POST_GRID_API_PLUGIN_SLUG,
+			'slug'              => GT_USERS_API_PLUGIN_SLUG,
 		];
 
 		/**
@@ -115,7 +115,7 @@ if ( ! class_exists( RtTpgApi::class ) ) {
 		 * @return void
 		 */
 		private function load_hooks() {
-			register_deactivation_hook( RT_THE_POST_GRID_API_PLUGIN_FILE, [ Install::class, 'deactivate' ] );
+			register_deactivation_hook( GT_USERS_API_PLUGIN_FILE, [ Install::class, 'deactivate' ] );
 			add_action( 'plugins_loaded', [ $this, 'on_plugins_loaded' ], - 1 );
 			add_action( 'init', [ $this, 'init_hooks' ], 0 );
 		}
@@ -142,7 +142,7 @@ if ( ! class_exists( RtTpgApi::class ) ) {
 			$locale = apply_filters( 'plugin_locale', $locale, 'the-post-grid-api' );
 			unload_textdomain( 'the-post-grid-api' );
 			load_textdomain( 'the-post-grid-api', WP_LANG_DIR . '/the-post-grid-api/the-post-grid-api-' . $locale . '.mo' );
-			load_plugin_textdomain( 'the-post-grid-api', false, plugin_basename( dirname( RT_THE_POST_GRID_API_PLUGIN_FILE ) ) . '/languages' );
+			load_plugin_textdomain( 'the-post-grid-api', false, plugin_basename( dirname( GT_USERS_API_PLUGIN_FILE ) ) . '/languages' );
 		}
 
 		/**
@@ -160,7 +160,7 @@ if ( ! class_exists( RtTpgApi::class ) ) {
 		 * @return string
 		 */
 		public function plugin_path() {
-			return untrailingslashit( plugin_dir_path( RT_THE_POST_GRID_API_PLUGIN_FILE ) );
+			return untrailingslashit( plugin_dir_path( GT_USERS_API_PLUGIN_FILE ) );
 		}
 
 		/**
@@ -180,7 +180,7 @@ if ( ! class_exists( RtTpgApi::class ) ) {
 		 * @return string
 		 */
 		public function default_template_path() {
-			return apply_filters( 'tpg_api_default_template_path', untrailingslashit( plugin_dir_path( RT_THE_POST_GRID_API_PLUGIN_FILE ) ) );
+			return apply_filters( 'tpg_api_default_template_path', untrailingslashit( plugin_dir_path( GT_USERS_API_PLUGIN_FILE ) ) );
 		}
 
 		/**
@@ -211,7 +211,7 @@ if ( ! class_exists( RtTpgApi::class ) ) {
 		public function get_assets_uri( $file ) {
 			$file = ltrim( $file, '/' );
 
-			return trailingslashit( RT_THE_POST_GRID_API_PLUGIN_URL . '/assets' ) . $file;
+			return trailingslashit( GT_USERS_API_PLUGIN_URL . '/assets' ) . $file;
 		}
 
 		/**
@@ -228,7 +228,7 @@ if ( ! class_exists( RtTpgApi::class ) ) {
 				$file .= '.rtl';
 			}
 
-			return trailingslashit( RT_THE_POST_GRID_API_PLUGIN_URL . '/assets' ) . $file . '.min.css';
+			return trailingslashit( GT_USERS_API_PLUGIN_URL . '/assets' ) . $file . '.min.css';
 		}
 
 		/**

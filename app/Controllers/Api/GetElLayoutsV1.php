@@ -140,7 +140,7 @@ class GetElLayoutsV1 {
 				'term_id' => $term->term_id,
 				'slug'    => $term->slug,
 				'name'    => $term->name,
-				'image'   => $parent_term_bg_url ? wp_get_attachment_image_src( $parent_term_bg_url, 'full' )[0] : '',
+//				'image'   => $parent_term_bg_url ? wp_get_attachment_image_src( $parent_term_bg_url, 'full' )[0] : '',
 				'count'   => $term->count,
 			];
 

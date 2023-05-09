@@ -56,3 +56,32 @@ WP_Post Object
 )
 
 
+WP_Post Object
+(
+    [ID] => 8192
+    [post_author] => 1
+    [post_date] => 2023-04-04 09:26:59
+    [post_date_gmt] => 2023-04-04 09:26:59
+    [post_content] => <!-- wp:rttpg/tpg-grid-layout {"uniqueId":"8a5fdb","grid_layout":"grid-layout4"} /-->
+    [post_title] => 
+    [post_excerpt] => 
+    [post_status] => publish
+    [comment_status] => closed
+    [ping_status] => closed
+    [post_password] => 
+    [post_name] => 8192-2
+    [to_ping] => 
+    [pinged] => 
+    [post_modified] => 2023-04-04 09:26:59
+    [post_modified_gmt] => 2023-04-04 09:26:59
+    [post_content_filtered] => 
+    [post_parent] => 0
+    [guid] => http://spectra.test/?page_id=8192
+    [menu_order] => 0
+    [post_type] => page
+    [post_mime_type] => 
+    [comment_count] => 0
+    [filter] => raw
+)
+
+

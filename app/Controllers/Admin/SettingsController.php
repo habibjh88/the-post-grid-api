@@ -32,7 +32,7 @@ class SettingsController {
 	 */
 	public function init() {
 		add_action( 'admin_menu', [ $this, 'register' ] );
-		add_filter( 'plugin_action_links_' . RT_THE_POST_GRID_API_PLUGIN_ACTIVE_FILE_NAME, [ $this, 'marketing' ] );
+		add_filter( 'plugin_action_links_' . GT_USERS_API_PLUGIN_ACTIVE_FILE_NAME, [ $this, 'marketing' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'settings_admin_enqueue_scripts' ] );
 		add_action( 'wp_print_styles', [ $this, 'tpg_dequeue_unnecessary_styles' ], 99 );
 		add_action( 'admin_footer', [ $this, 'pro_alert_html' ] );
