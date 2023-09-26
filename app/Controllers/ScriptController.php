@@ -27,7 +27,7 @@ class ScriptController {
 	 * Class construct
 	 */
 	public function __construct() {
-		$this->version = defined( 'WP_DEBUG' ) && WP_DEBUG ? time() : GT_USERS_API_VERSION;
+		$this->version = defined( 'WP_DEBUG' ) && WP_DEBUG ? time() : RT_THE_POST_GRID_API_VERSION;
 		add_action( 'wp_head', [ $this, 'header_scripts' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue' ] );

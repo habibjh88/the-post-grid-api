@@ -134,13 +134,13 @@ class GetElLayoutsV1 {
 		$total_term_count = 0;
 		foreach ( $terms as $term ) {
 			$total_term_count   += $term->count;
-			$parent_term_bg_url = get_term_meta( $term->term_id, rtTPGApi()->rttpg_cat_thumbnail, true );
+			//$parent_term_bg_url = get_term_meta( $term->term_id, rtTPGApi()->rttpg_cat_thumbnail, true );
 
 			$send_data['layouts']['category'][] = [
 				'term_id' => $term->term_id,
 				'slug'    => $term->slug,
 				'name'    => $term->name,
-//				'image'   => $parent_term_bg_url ? wp_get_attachment_image_src( $parent_term_bg_url, 'full' )[0] : '',
+				//'image'   => $parent_term_bg_url ? wp_get_attachment_image_src( $parent_term_bg_url, 'full' )[0] : '',
 				'count'   => $term->count,
 			];
 

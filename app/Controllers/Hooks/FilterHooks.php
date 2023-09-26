@@ -172,7 +172,7 @@ class FilterHooks {
 	 * @return array
 	 */
 	public static function plugin_row_meta( $links, $file ) {
-		if ( $file == GT_USERS_API_PLUGIN_ACTIVE_FILE_NAME ) {
+		if ( $file == RT_THE_POST_GRID_API_PLUGIN_ACTIVE_FILE_NAME ) {
 			$report_url         = 'https://www.radiustheme.com/contact/';
 			$row_meta['issues'] = sprintf(
 				'%2$s <a target="_blank" href="%1$s">%3$s</a>',
@@ -195,7 +195,7 @@ class FilterHooks {
 	public static function template_callback( $file ) {
 		global $post;
 		if ( in_array( $post->post_type, [ rtTPGApi()->post_type_layout, rtTPGApi()->post_type_section ] ) ) {
-			$file_path = GT_USERS_API_PLUGIN_PATH . '/templates/single-layout.php'; //Actual file path
+			$file_path = RT_THE_POST_GRID_API_PLUGIN_PATH . '/templates/single-layout.php'; //Actual file path
 			$file      = $file_path;
 		}
 

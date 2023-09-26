@@ -19,19 +19,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'This script cannot be accessed directly.' );
 }
 
-define( 'GT_USERS_API_VERSION', '1.0.0' );
-define( 'GT_USERS_API_AUTHOR', 'RadiusTheme' );
-define( 'GT_USERS_API_NAME', 'The Post Grid' );
-define( 'GT_USERS_API_PLUGIN_FILE', __FILE__ );
-define( 'GT_USERS_API_PLUGIN_PLUGIN_BASE', plugin_basename( GT_USERS_API_PLUGIN_FILE ) );
-define( 'GT_USERS_API_PLUGIN_PATH', dirname( __FILE__ ) );
-define( 'GT_USERS_API_PLUGIN_ACTIVE_FILE_NAME', plugin_basename( __FILE__ ) );
-define( 'GT_USERS_API_PLUGIN_URL', plugins_url( '', __FILE__ ) );
-define( 'GT_USERS_API_PLUGIN_SLUG', basename( dirname( __FILE__ ) ) );
-define( 'GT_USERS_API_LANGUAGE_PATH', dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+define( 'RT_THE_POST_GRID_API_VERSION', '1.0.0' );
+define( 'RT_THE_POST_GRID_API_AUTHOR', 'RadiusTheme' );
+define( 'RT_THE_POST_GRID_API_NAME', 'The Post Grid' );
+define( 'RT_THE_POST_GRID_API_PLUGIN_FILE', __FILE__ );
+define( 'RT_THE_POST_GRID_API_PLUGIN_PLUGIN_BASE', plugin_basename( RT_THE_POST_GRID_API_PLUGIN_FILE ) );
+define( 'RT_THE_POST_GRID_API_PLUGIN_PATH', dirname( __FILE__ ) );
+define( 'RT_THE_POST_GRID_API_PLUGIN_ACTIVE_FILE_NAME', plugin_basename( __FILE__ ) );
+define( 'RT_THE_POST_GRID_API_PLUGIN_URL', plugins_url( '', __FILE__ ) );
+define( 'RT_THE_POST_GRID_API_PLUGIN_SLUG', basename( dirname( __FILE__ ) ) );
+define( 'RT_THE_POST_GRID_API_LANGUAGE_PATH', dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
-register_activation_hook( GT_USERS_API_PLUGIN_FILE, function () {
-	update_option( 'rt_the_post_grid_current_version', GT_USERS_API_VERSION );
+register_activation_hook( RT_THE_POST_GRID_API_PLUGIN_FILE, function () {
+	update_option( 'rt_the_post_grid_current_version', RT_THE_POST_GRID_API_VERSION );
 	rttpg_api_create_table();
 	rttpg_insert_data();
 } );
@@ -105,6 +105,6 @@ function my_function_on_new_post( $new_status, $old_status, $post ) {
 
 add_action('transition_post_status', 'my_function_on_new_post', 10, 3);
 
-if ( ! class_exists( 'GtUsers' ) ) {
+if ( ! class_exists( 'rtTPG' ) ) {
 	require_once 'app/RtTpg.php';
 }
