@@ -77,7 +77,7 @@ class GetElLayoutsV1 {
 			}
 		} else {
 			$send_data['success']                     = 'error';
-			$send_data['layouts']['posts']['message'] = __( "No posts found", "the-post-grid-api" );
+			$send_data['layouts']['posts']['message'] = "No posts found";
 		}
 
 		wp_reset_postdata();
@@ -121,7 +121,7 @@ class GetElLayoutsV1 {
 			}
 		} else {
 			$send_data['success']                      = 'error';
-			$send_data['sections']['posts']['message'] = __( "No posts found", "the-post-grid-api" );
+			$send_data['sections']['posts']['message'] = "No posts found";
 		}
 
 		wp_reset_postdata();
