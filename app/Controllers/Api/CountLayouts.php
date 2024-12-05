@@ -14,7 +14,7 @@ class CountLayouts {
 
 	public function register_post_route() {
 		register_rest_route( 'rttpgapi/v1', 'layoutinfo', [
-			'methods'             => 'POST',
+			'methods'             => 'GET',
 			'callback'            => [ $this, 'layout_count' ],
 			'permission_callback' => function () {
 				return true;
