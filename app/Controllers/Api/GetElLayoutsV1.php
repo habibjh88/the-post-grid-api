@@ -14,7 +14,7 @@ class GetElLayoutsV1 {
 
 	public function register_post_route() {
 		register_rest_route( 'rttpgelapi/v1', 'layouts', [
-			'methods'             => 'GET',
+			'methods'             => ['GET', 'POST'],
 			'callback'            => [ $this, 'get_all_posts' ],
 			'permission_callback' => function () {
 				return true;
